@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       language.belongsToMany(models.user, {
-        through: "itemTags",
-        foreignKey: "tagId",
+        through: "userLangs",
+        foreignKey: "langId",
       });
     }
   }
