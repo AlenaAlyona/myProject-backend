@@ -45,6 +45,36 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          lang: "Turkish",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          lang: "Arabic",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          lang: "Hindi",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          lang: "Polish",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          lang: "Ukranian",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          lang: "Greek",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
