@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       user.hasMany(models.child);
       user.belongsToMany(models.language, {
-        through: "user_lang",
-        foreignKey: "langId",
+        through: "userLangs",
+        foreignKey: "userId",
       });
     }
   }
