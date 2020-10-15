@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   userLang.init(
     {
       userId: DataTypes.INTEGER,
-      langId: DataTypes.INTEGER,
+      languageId: DataTypes.INTEGER,
     },
     {
       sequelize,
