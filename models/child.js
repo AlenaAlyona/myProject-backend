@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   child.init(
     {
-      age: DataTypes.INTEGER,
+      age: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
