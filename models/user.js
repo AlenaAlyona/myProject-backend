@@ -34,13 +34,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      location: {
-        type: DataTypes.STRING,
+      cityId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      municipality: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        references: {
+          model: "cities",
+          key: "id",
+        },
       },
       bio: {
         type: DataTypes.STRING,

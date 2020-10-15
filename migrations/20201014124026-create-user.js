@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      cityId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "cities",
+          key: "id",
+        },
+      },
       email: {
         type: Sequelize.STRING,
         unique: true,
@@ -22,14 +30,6 @@ module.exports = {
         allowNull: false,
       },
       lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      location: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      municipality: {
         type: Sequelize.STRING,
         allowNull: false,
       },
