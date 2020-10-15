@@ -3,83 +3,65 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return await queryInterface.bulkInsert(
-      "userLangs",
+      "cities",
       [
         {
-          userId: 1,
-          languageId: 3,
+          name: "Amsterdam",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 1,
-          languageId: 1,
+          name: "Utrecht",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 2,
-          languageId: 3,
+          name: "Rotterdam",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 2,
-          languageId: 2,
+          name: "Den Haag",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 3,
-          languageId: 3,
+          name: "Tilburg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 3,
-          languageId: 2,
+          name: "Groningen",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 4,
-          languageId: 4,
+          name: "Eindhoven",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 4,
-          languageId: 1,
+          name: "Almere",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 4,
-          languageId: 2,
+          name: "Breda",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 5,
-          languageId: 4,
+          name: "Nijmegen",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 5,
-          languageId: 1,
+          name: "Enschede",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 6,
-          languageId: 4,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          userId: 6,
-          languageId: 2,
+          name: "Haarlem",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -89,6 +71,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkDelete("userLangs", null, {});
+    await queryInterface.bulkDelete("cities", null, {});
   },
 };

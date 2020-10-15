@@ -17,7 +17,7 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      langId: {
+      languageId: {
         type: Sequelize.INTEGER,
         references: {
           model: "languages",

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       language.belongsToMany(models.user, {
         through: "userLangs",
-        foreignKey: "langId",
+        foreignKey: "languageId",
       });
     }
   }
