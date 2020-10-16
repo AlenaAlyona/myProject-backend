@@ -78,10 +78,14 @@ router.post("/signup", async (req, res) => {
     delete newUser.dataValues["password"]; // don't send back the password hash
     const token = toJWT({ userId: newUser.id });
 
-    const child = await Child.create({
-      age: parseInt(age),
-      userId: newUser.id,
-    });
+    const children = await Promise.all(
+      age.map(async (a) => {
+        await Child.create({
+          age: parseInt(a),
+          userId: newUser.id,
+        });
+      })
+    );
 
     const newUserLang = await UserLang.create({
       languageId: parseInt(languageId),
@@ -91,8 +95,8 @@ router.post("/signup", async (req, res) => {
     res.status(201).json({
       token,
       ...newUser.dataValues,
-      child: {
-        ...child.dataValues,
+      children: {
+        ...children.dataValues,
       },
     });
   } catch (error) {

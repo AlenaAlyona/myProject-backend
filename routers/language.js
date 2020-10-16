@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const City = require("../models").city;
+const Lang = require("../models").language;
 
 const router = new Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const cities = await City.findAll();
-    res.json(cities);
+    const langs = await Lang.findAll();
+    res.json(langs);
   } catch (e) {
     next(e);
   }
