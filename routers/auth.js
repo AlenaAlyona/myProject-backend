@@ -47,8 +47,7 @@ router.post("/signup", async (req, res) => {
     password,
     firstName,
     lastName,
-    location,
-    municipality,
+    cityId,
     languageId,
     bio,
     age,
@@ -58,8 +57,7 @@ router.post("/signup", async (req, res) => {
     !password ||
     !firstName ||
     !lastName ||
-    !location ||
-    !municipality ||
+    !cityId ||
     !languageId ||
     !bio ||
     !age
@@ -73,8 +71,7 @@ router.post("/signup", async (req, res) => {
       password: bcrypt.hashSync(password, SALT_ROUNDS),
       firstName,
       lastName,
-      location,
-      municipality,
+      cityId,
       bio,
     });
 
@@ -119,7 +116,7 @@ router.get("/me", auth, async (req, res) => {
   });
   // don't send back the password hash
   delete req.user.dataValues["password"];
-  res.status(200).send({ ...req.user.dataValues, homepage });
+  res.status(200).send({ ...req.user.dataValues });
 });
 
 module.exports = router;
