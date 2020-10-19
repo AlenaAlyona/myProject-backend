@@ -25,7 +25,7 @@ router.post("/login", async (req, res, next) => {
         model: Child,
       },
     });
-
+    console.log("USER DATS", user.dataValues);
     if (!user || !bcrypt.compareSync(password, user.password)) {
       return res.status(400).send({
         message: "User with that email not found or password incorrect",
@@ -76,7 +76,7 @@ router.post("/signup", async (req, res) => {
     });
 
     delete newUser.dataValues["password"]; // don't send back the password hash
-    const token = toJWT({ userId: newUser.id });
+    // const token = toJWT({ userId: newUser.id });
 
     const children = await Promise.all(
       age.map(async (a) => {
@@ -93,7 +93,7 @@ router.post("/signup", async (req, res) => {
     });
 
     res.status(201).json({
-      token,
+      // token,
       ...newUser.dataValues,
       children: {
         ...children.dataValues,
