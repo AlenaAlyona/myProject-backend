@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const Lang = require("../models").language;
-const UserLang = require("../models").userLang;
 const User = require("../models").user;
+const Child = require("../models").child;
 const authMiddleware = require("../auth/middleware");
 
 const router = new Router();
@@ -17,15 +17,21 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:languageId/users", async (req, res) => {
   const languageId = req.params.languageId;
-
+  console.log("LANG ID", languageId);
   if (isNaN(parseInt(languageId))) {
     return res.status(400).send({ message: "Language id is not a number" });
   }
 
-  const usersWithLang = await UserLang.findAll({
-    include: User,
-    iclude: Lang,
-    where: { languageId },
+  const usersWithLang = await User.findAll({
+    include: [
+      {
+        model: Lang,
+        where: { id: languageId },
+      },
+      {
+        model: Child,
+      },
+    ],
   });
 
   return res.json(usersWithLang).status(201);
