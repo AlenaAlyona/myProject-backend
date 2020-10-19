@@ -2,6 +2,7 @@ const { Router } = require("express");
 const Lang = require("../models").language;
 const User = require("../models").user;
 const Child = require("../models").child;
+const City = require("../models").city;
 const authMiddleware = require("../auth/middleware");
 
 const router = new Router();
@@ -30,6 +31,9 @@ router.get("/:languageId/users", async (req, res) => {
       },
       {
         model: Child,
+      },
+      {
+        model: City,
       },
     ],
   });
