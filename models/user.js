@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       user.hasMany(models.child);
+      user.belongsTo(models.city);
       user.belongsToMany(models.language, {
         through: "userLangs",
         foreignKey: "userId",
