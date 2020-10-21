@@ -42,30 +42,42 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const {
-    email,
-    password,
-    firstName,
-    lastName,
-    cityId,
-    languageId,
-    bio,
-    age,
-  } = req.body;
-  if (
-    !email ||
-    !password ||
-    !firstName ||
-    !lastName ||
-    !cityId ||
-    !languageId ||
-    !bio ||
-    !age
-  ) {
-    return res.status(400).send("Please provide all the information");
-  }
-
   try {
+    const {
+      email,
+      password,
+      passwordConfirmation,
+      firstName,
+      lastName,
+      cityId,
+      languageId,
+      bio,
+      age,
+    } = req.body;
+    if (
+      !email ||
+      !password ||
+      !passwordConfirmation ||
+      !firstName ||
+      !lastName ||
+      !cityId ||
+      !languageId ||
+      !bio ||
+      !age
+    ) {
+      return res
+        .status(400)
+        .send({ message: "Please provide all the information" });
+    } else if (password.length < 6) {
+      return res
+        .status(400)
+        .send({ message: "Password must contain at least 6 characters" });
+    } else if (password !== passwordConfirmation) {
+      return res
+        .status(400)
+        .send({ message: "Password and password confirmation don't match" });
+    }
+
     const newUser = await User.create({
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
@@ -76,7 +88,6 @@ router.post("/signup", async (req, res) => {
     });
 
     delete newUser.dataValues["password"];
-    const token = toJWT({ userId: newUser.id });
 
     const children = await Promise.all(
       age.map(async (a) => {
@@ -97,7 +108,6 @@ router.post("/signup", async (req, res) => {
     );
 
     res.status(201).json({
-      token,
       ...newUser.dataValues,
       children: {
         ...children.dataValues,
