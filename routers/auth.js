@@ -75,8 +75,8 @@ router.post("/signup", async (req, res) => {
       bio,
     });
 
-    delete newUser.dataValues["password"]; // don't send back the password hash
-    // const token = toJWT({ userId: newUser.id });
+    delete newUser.dataValues["password"];
+    const token = toJWT({ userId: newUser.id });
 
     const children = await Promise.all(
       age.map(async (a) => {
@@ -87,16 +87,23 @@ router.post("/signup", async (req, res) => {
       })
     );
 
-    const newUserLang = await UserLang.create({
-      languageId: parseInt(languageId),
-      userId: newUser.id,
-    });
+    const languages = await Promise.all(
+      languageId.map(async (l) => {
+        await UserLang.create({
+          languageId: parseInt(l),
+          userId: newUser.id,
+        });
+      })
+    );
 
     res.status(201).json({
-      // token,
+      token,
       ...newUser.dataValues,
       children: {
         ...children.dataValues,
+      },
+      userLangs: {
+        ...languages.dataValues,
       },
     });
   } catch (error) {
@@ -110,15 +117,12 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// The /me endpoint can be used to:
-// - get the users email & name using only their token
-// - checking if a token is (still) valid
 router.get("/me", auth, async (req, res) => {
   const user = await User.findOne({
     where: { id: req.user.id },
     include: [Child],
   });
-  // don't send back the password hash
+
   delete req.user.dataValues["password"];
   res.status(200).send({ ...req.user.dataValues });
 });
