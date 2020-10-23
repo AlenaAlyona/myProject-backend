@@ -3,6 +3,7 @@ module.exports = {
   development: {
     url: process.env.DATABASE_URL_DEVELOPMENT,
     dialect: "postgres",
+    operatorsAliases: "0",
   },
   test: {
     username: "root",
